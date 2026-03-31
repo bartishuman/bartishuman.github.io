@@ -19,6 +19,7 @@
     </head>
     <body>
         <a href="#career" class="skip-link">Skip to content</a>
+        <button id="theme-toggle" aria-label="Switch to light mode">&#9788;</button>
         <section id="hero">
             <header class="container">
                 <img src="logo.svg" id="logo" alt="Bart Huisman logo" width="50" height="50">
@@ -114,6 +115,33 @@
                 <a href="mailto:bartishuman@gmail.com" class="contactlink">bartishuman@gmail.com</a>
             </footer>
         </section>
+        <script>
+            (function () {
+                var toggle = document.getElementById('theme-toggle');
+                var stored = localStorage.getItem('theme');
+                if (stored) {
+                    document.documentElement.setAttribute('data-theme', stored);
+                }
+                function updateLabel() {
+                    var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+                    toggle.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
+                    toggle.textContent = isLight ? '\u263E' : '\u2600';
+                }
+                updateLabel();
+                toggle.addEventListener('click', function () {
+                    var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+                    var next = isLight ? 'dark' : 'light';
+                    if (next === 'dark') {
+                        document.documentElement.removeAttribute('data-theme');
+                        localStorage.removeItem('theme');
+                    } else {
+                        document.documentElement.setAttribute('data-theme', next);
+                        localStorage.setItem('theme', next);
+                    }
+                    updateLabel();
+                });
+            })();
+        </script>
         <script>
             (function () {
                 var grid = document.querySelector('.careergrid');
