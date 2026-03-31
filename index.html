@@ -19,7 +19,7 @@
     </head>
     <body>
         <a href="#career" class="skip-link">Skip to content</a>
-        <button id="theme-toggle" aria-label="Switch to light mode">&#9788;</button>
+        <button id="theme-toggle" aria-label="Switch to light mode"><img src="lightmode.svg" alt="" width="24" height="24"></button>
         <section id="hero">
             <header class="container">
                 <img src="logo.svg" id="logo" alt="Bart Huisman logo" width="50" height="50">
@@ -122,7 +122,7 @@
                 function updateLabel() {
                     var isLight = document.documentElement.getAttribute('data-theme') === 'light';
                     toggle.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
-                    toggle.textContent = isLight ? '\u263E' : '\u2600';
+                    toggle.querySelector('img').src = isLight ? 'darkmode.svg' : 'lightmode.svg';
                 }
                 updateLabel();
                 toggle.addEventListener('click', function () {
